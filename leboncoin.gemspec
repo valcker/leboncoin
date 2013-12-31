@@ -17,6 +17,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'bundler', '~> 1.5'
   spec.add_development_dependency 'vcr', '~> 2.8.0'
 
-	spec.add_dependency 'faraday', '~> 0.8.8'
-	spec.add_dependency 'nokogiri', '~> 1.6.1'
+  spec.add_dependency 'faraday', '~> 0.8.8'
+  spec.add_dependency 'nokogiri', '~> 1.6.1'
 end
