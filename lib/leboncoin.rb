@@ -31,7 +31,8 @@ module Leboncoin
       { :title => node.css('.title')[0].text.strip,
         :time => ResultTime.parse(node.css('.date')[0].text.strip.gsub(/\s+/, ' ')),
         :price => (n = node.css('.price')[0] and n.text.to_i),
-        :url => node.ancestors('a')[0].attr('href') }
+        :url => node.ancestors('a')[0].attr('href'),
+        :photo_url => (n = node.css('.image img')[0] and n.attr('src').sub(/\/thumbs\//, '/images/')) }
     end
   end
 

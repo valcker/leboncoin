@@ -40,6 +40,7 @@ class LeboncoinTest < MiniTest::Unit::TestCase
     assert_kind_of Time, res[:time]
     assert_equal 350, res[:price]
     assert_equal "http://www.leboncoin.fr/velos/595226659.htm?ca=12_s", res[:url]
+    assert_equal "http://193.164.196.60/images/695/695330119477510.jpg", res[:photo_url]
   end
 
   def test_parse_results_without_price
@@ -48,6 +49,14 @@ class LeboncoinTest < MiniTest::Unit::TestCase
     res = results[-2]
     assert_equal "Diaporama photos -- Montage vidéo", res[:title] # sanity check
     assert_nil res[:price]
+  end
+
+  def test_parse_results_without_photo
+    html = File.read(FIXTURES_DIR + '/results_without_photo.html', {encoding: Leboncoin::HTML_ENCODING})
+    results = Leboncoin.parse_results(html)
+    res = results[-4]
+    assert_equal "Iphone 4", res[:title] # sanity check
+    assert_nil res[:photo_url]
   end
 end
 
