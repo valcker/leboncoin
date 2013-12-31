@@ -20,7 +20,7 @@ class LeboncoinTest < MiniTest::Unit::TestCase
     assert_equal Leboncoin::HTML_ENCODING, html.encoding
   end
 
-  def test_search_raw_with_error
+  def test_search_raw_error
     exc = assert_raises Leboncoin::Error do
       VCR.use_cassette('404') do
         Leboncoin.search_raw('http://notfound')
@@ -69,9 +69,18 @@ class LeboncoinResultTimeTest < MiniTest::Unit::TestCase
     assert_lbc_time [d,m,y,15,10], "Aujourd'hui 15:10"
     assert_lbc_time [d-1,m,y,22,43], "Hier 22:43"
     assert_lbc_time [27,12,y,21,57], "27 déc 21:57"
-    assert_raises Leboncoin::Error do
+  end
+
+  def test_parse_invalid_format
+    exc = assert_raises Leboncoin::Error do
       Leboncoin::ResultTime.parse("27 INVALID 21:57")
     end
+    assert_match /format: 27/, exc.message
+
+    exc = assert_raises Leboncoin::Error do
+      Leboncoin::ResultTime.parse("???")
+    end
+    assert_match /format: \?\?\?/, exc.message
   end
 
 private
