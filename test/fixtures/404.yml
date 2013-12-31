@@ -1,0 +1,29 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://notfound
+  response:
+    status:
+      code: 404
+    headers:
+      date:
+      - Mon, 30 Dec 2013 23:47:28 GMT
+      server:
+      - Apache
+      set-cookie:
+      - th=1; domain=.leboncoin.fr; path=/; expires=Thu, 01-Jan-1970 00:00:01 GMT;,
+        sq=ca=12_s&f=a&th=1&q=rockrider+8.1; domain=.leboncoin.fr; path=/;, sq=ca=12_s&f=a&th=1&q=rockrider+8.1;
+        domain=.leboncoin.fr; path=/;, layout=0; domain=.leboncoin.fr; path=/;
+      vary:
+      - Accept-Encoding,User-Agent
+      p3p:
+      - CP='NOI DSP COR PSAo PSDo'
+      content-length:
+      - '17728'
+      connection:
+      - close
+      content-type:
+      - text/html; charset=windows-1252
+  recorded_at: Mon, 30 Dec 2013 23:47:28 GMT
+recorded_with: VCR 2.8.0
