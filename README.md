@@ -11,7 +11,7 @@ Features:
 
 ## Usage
 
-## Results parsing
+### Results parsing
 
 ```ruby
 require 'leboncoin'
@@ -45,7 +45,7 @@ Example value of `results`:
   :photo_url=>"http://193.164.197.60/images/696/696330111779591.jpg"}]
 ```
 
-## Atom feed generation
+### Atom feed generation
 
 ```ruby
 title = "Rockrider 8.1"
