@@ -11,6 +11,8 @@ Features:
 
 ## Usage
 
+## Results parsing
+
 ```ruby
 require 'leboncoin'
 
@@ -42,3 +44,21 @@ Example value of `results`:
   :url=>"http://www.leboncoin.fr/telephonie/595323204.htm?ca=12_s",
   :photo_url=>"http://193.164.197.60/images/696/696330111779591.jpg"}]
 ```
+
+## Atom feed generation
+
+```ruby
+title = "Rockrider 8.1"
+url = "http://www.leboncoin.fr/annonces/offres/ile_de_france/?f=a&th=1&q=rockrider+8.1"
+feed = Leboncoin::Feed.new(title, url)
+puts feed.to_xml
+```
+
+A Rack app is provided to create an Atom feed webserver. Example `config.ru`:
+
+```ruby
+feed = Leboncoin::Feed.new(title, url)
+run Leboncoin::Feed::RackApp.new(feed)
+```
+
+See `examples/my-feed/`.
