@@ -1,0 +1,25 @@
+PATH
+  remote: .
+  specs:
+    leboncoin (0.1.1)
+      faraday (~> 0.8.8)
+      nokogiri (~> 1.6.1)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    faraday (0.8.9)
+      multipart-post (~> 1.2.0)
+    mini_portile (0.5.3)
+    multipart-post (1.2.0)
+    nokogiri (1.6.1)
+      mini_portile (~> 0.5.0)
+    vcr (2.8.0)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  bundler (~> 1.5)
+  leboncoin!
+  vcr (~> 2.8.0)

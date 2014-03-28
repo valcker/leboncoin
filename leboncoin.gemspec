@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |spec|
   spec.name          = 'leboncoin'
-  spec.version       = '0.1.1'
+  spec.version       = '0.1.2'
   spec.authors       = ['Roman Le Négrate']
   spec.email         = ['roman.lenegrate@gmail.com']
   spec.summary       = %q{Leboncoin results parser and Atom feed generator}
