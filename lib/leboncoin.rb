@@ -4,6 +4,8 @@ require 'faraday'
 require 'nokogiri'
 
 module Leboncoin
+  autoload :Feed, 'leboncoin/feed'
+
   class Error < RuntimeError
   end
 
