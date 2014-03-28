@@ -32,11 +32,11 @@ module Leboncoin
   def self.parse_results(html)
     doc = Nokogiri::HTML(html)
     doc.css('.lbc').map do |node|
-      { :title => node.at_css('.title').text.strip,
-        :time => ResultTime.parse(node.at_css('.date').text.strip.gsub(/\s+/, ' ')),
-        :price => (n = node.at_css('.price') and n.text.to_i),
-        :url => node.ancestors('a')[0].attr('href'),
-        :photo_url => (n = node.at_css('.image img') and n.attr('src').sub(/\/thumbs\//, '/images/')) }
+      { title:      node.at_css('.title').text.strip,
+        time:       ResultTime.parse(node.at_css('.date').text.strip.gsub(/\s+/, ' ')),
+        price:      (n = node.at_css('.price') and n.text.to_i),
+        url:        node.ancestors('a')[0].attr('href'),
+        photo_url:  (n = node.at_css('.image img') and n.attr('src').sub(/\/thumbs\//, '/images/')) }
     end
   end
 
