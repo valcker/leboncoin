@@ -31,12 +31,12 @@ module Leboncoin
 
   def self.parse_results(html)
     doc = Nokogiri::HTML(html)
-    doc.css('.lbc').map do |node|
-      { title:      node.at_css('.title').text.strip,
-        time:       ResultTime.parse(node.at_css('.date').text.strip.gsub(/\s+/, ' ')),
-        price:      (n = node.at_css('.price') and n.text.to_i),
-        url:        node.ancestors('a')[0].attr('href'),
-        photo_url:  (n = node.at_css('.image img') and n.attr('src').sub(/\/thumbs\//, '/images/')) }
+    doc.css('.tabsContent.dontSwitch.block-white li').map do |node|
+      { title:      node.at_css('.list_item').attr('title').strip,
+        time:       ResultTime.parse(node.at_css('.item_absolute p').text.strip.gsub(/\s+/, ' ')),
+        price:      (n = node.at_css('.item_price') and n.text.to_i),
+        url:        node.at_css('.list_item').attr('href').prepend('http:'),
+        photo_url:  (n = node.at_css('.item_imagePic span') and n.attr('data-imgsrc').sub(/\/thumbs\//, '/images/').prepend('http:')) }
     end
   end
 
@@ -45,13 +45,13 @@ module Leboncoin
     MONTHS = %w(jan fév mars avr mai juin juillet août sept oct nov déc).freeze
     
     months = MONTHS.map { |m| Regexp.escape(m) }
-    DATE_RE = /(\d\d?) (#{months * '|'}) (\d\d?):(\d\d)$/
+    DATE_RE = /(\d\d?) (#{months * '|'}), (\d\d?):(\d\d)$/
 
     def self.parse(str)
       case str
-      when /^Aujourd'hui (\d\d?):(\d\d)$/
+      when /^Aujourd'hui, (\d\d?):(\d\d)$/
         today_at($1, $2)
-      when /^Hier (\d\d?):(\d\d)$/
+      when /^Hier, (\d\d?):(\d\d)$/
         today_at($1, $2) - 86400
       when DATE_RE
         t = Time.now.utc
