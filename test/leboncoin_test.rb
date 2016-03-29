@@ -58,6 +58,14 @@ class LeboncoinTest < MiniTest::Unit::TestCase
     assert_equal "IPhone 6 128 go", res[:title] # sanity check
     assert_nil res[:photo_url]
   end
+
+  def test_parse_results_with_high_price
+    html = File.read(FIXTURES_DIR + '/results_with_high_price.html', {encoding: Leboncoin::HTML_ENCODING})
+    results = Leboncoin.parse_results(html)
+    res = results.first
+    assert_equal "Appartement 3 pièces 57m² Chanteloup-en-Brie", res[:title]
+    assert_equal 205000, res[:price]
+  end
 end
 
 class LeboncoinResultTimeTest < MiniTest::Unit::TestCase

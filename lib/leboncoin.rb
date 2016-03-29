@@ -33,8 +33,8 @@ module Leboncoin
     doc = Nokogiri::HTML(html)
     doc.css('.tabsContent.dontSwitch.block-white li').map do |node|
       { title:      node.at_css('.list_item').attr('title').strip,
-        time:       ResultTime.parse(node.at_css('.item_absolute p').text.strip.gsub(/\s+/, ' ')),
-        price:      (n = node.at_css('.item_price') and n.text.to_i),
+        time:       ResultTime.parse(node.at_css('.item_absolute p').text.gsub('Urgent', '').strip.gsub(/\s+/, ' ')),
+        price:      (n = node.at_css('.item_price') and n.text.gsub(/\s+/, '').to_i),
         url:        node.at_css('.list_item').attr('href').prepend('http:'),
         photo_url:  (n = node.at_css('.item_imagePic span') and n.attr('data-imgsrc').sub(/\/thumbs\//, '/images/').prepend('http:')) }
     end
